@@ -1,16 +1,17 @@
-from helper import *
-from json_helper import *
+import country_scraper
+import json_helper
 
 file_path: str = 'countries.json'
 
 
 def main():
-    country_data = get_all_countries()
-    country_json = generate_json_from_country_data_list(country_data)
-    save_json_string_into_file(country_json, file_path)
+    country_raw_data = country_scraper.get_country_raw_data()
+    country_list = country_scraper.to_country_list(country_raw_data)
+    json_string = json_helper.data_to_json_string(country_list)
+    json_helper.save_json_string_into_file(json_string, file_path)
 
-    json_string = read_file_as_string(file_path)
-    country_list: list[Country] = json_string_to_data(json_string)
+    country_list = []
+    country_list = country_scraper.generate_data_from_json_file(file_path)
     print(country_list)
 
 

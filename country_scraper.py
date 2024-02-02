@@ -1,29 +1,27 @@
 import re
 
-import requests
-from bs4 import BeautifulSoup
-
-from json_helper import data_to_json_string
+import json_helper
+import scraping_helper
 from models import Country
 
 
-def get_all_countries():
+def get_country_raw_data():
     # URL of the website
     url = "https://www.scrapethissite.com/pages/simple/"
 
     # Send a GET request to the URL
-    response = requests.get(url, timeout=5)
+    response = scraping_helper.get_http_response(url)
 
     # Check if the request was successful (status code 200)
     if response.status_code == 200:
         # Parse the HTML content of the page
-        soup = BeautifulSoup(response.text, "html.parser")
+        soup = scraping_helper.parse_html_content_as_string(response.text)
 
         # Extract and print the title of the page
         title = soup.title.text.strip()
         print(f"Title: {title}\n")
 
-        content_item = soup.find_all("div", {"class": "col-md-4 country"})
+        content_item = scraping_helper.find_all_by_class_name(soup, "div", {"class": "col-md-4 country"})
 
         country_data: list[str] = []
 
@@ -39,7 +37,7 @@ def get_all_countries():
         return []
 
 
-def generate_json_from_country_data_list(country_data: list[str]):
+def to_country_list(country_data: list[str]):
     countries: list[Country] = []
 
     for country_str in country_data:
@@ -52,6 +50,10 @@ def generate_json_from_country_data_list(country_data: list[str]):
         country: Country = Country(country_name, capital_name, population, area)
         countries.append(country)
 
-    json_string = data_to_json_string(countries)
+    return countries
 
-    return json_string
+
+def generate_data_from_json_file(file_path: str):
+    json_string = json_helper.read_file_as_string(file_path)
+    country_list: list[Country] = json_helper.json_string_to_data(json_string)
+    return country_list
