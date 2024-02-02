@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 
 from json_helper import data_to_json_string
 from models import Country
-import json
 
 
 def get_all_countries():
