@@ -3,6 +3,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
+from json_helper import data_to_json_string
 from models import Country
 import json
 
@@ -52,13 +53,6 @@ def generate_json_from_country_data_list(country_data: list[str]):
         country: Country = Country(country_name, capital_name, population, area)
         countries.append(country)
 
-    json_string = json.dumps(countries, default=lambda x: x.__dict__, indent=4)
+    json_string = data_to_json_string(countries)
 
     return json_string
-
-
-def save_json_string_into_file(json_string: str, file_path: str):
-    # Open a file in write mode
-    with open(file_path, "w") as f:
-        # Write the JSON string to the file
-        f.write(json_string)
