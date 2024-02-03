@@ -3,7 +3,7 @@ import re
 
 from helpers import scraping_helper
 from helpers import json_helper
-from models import Country
+from models.country_model import Country
 
 
 def get_country_raw_data():
