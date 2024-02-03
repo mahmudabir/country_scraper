@@ -1,5 +1,4 @@
-import country_scraper
-import json_helper
+from helpers import country_scraper, json_helper
 
 file_path: str = 'countries.json'
 

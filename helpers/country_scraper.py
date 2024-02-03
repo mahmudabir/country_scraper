@@ -1,7 +1,8 @@
 import re
 
-import json_helper
-import scraping_helper
+
+from helpers import scraping_helper
+from helpers import json_helper
 from models import Country
 
 
