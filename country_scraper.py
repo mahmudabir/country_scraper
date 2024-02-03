@@ -17,11 +17,11 @@ def get_country_raw_data():
         # Parse the HTML content of the page
         soup = scraping_helper.parse_html_content_as_string(response.text)
 
-        # Extract and print the title of the page
-        title = soup.title.text.strip()
-        print(f"Title: {title}\n")
+        # # Extract and print the title of the page
+        # title = soup.title.text.strip()
+        # print(f"Title: {title}\n")
 
-        content_item = scraping_helper.find_all_by_class_name(soup, "div", {"class": "col-md-4 country"})
+        content_item = scraping_helper.find_all_by_class_name(soup, "div", "col-md-4 country")
 
         country_data: list[str] = []
 
