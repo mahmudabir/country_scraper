@@ -1,4 +1,4 @@
-from helpers import country_scraper, json_helper
+from helpers import country_scraper, json_helper, common_helper
 
 file_path: str = 'countries.json'
 
@@ -11,8 +11,13 @@ def main():
 
     country_list = []
     country_list = country_scraper.generate_data_from_json_file(file_path)
-    print(country_list)
 
 
 if __name__ == "__main__":
     main()
+
+    try:
+        print('\nPress any key to continue...')
+        common_helper.wait_for_key()
+    except Exception as ex:
+        pass
