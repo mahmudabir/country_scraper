@@ -3,18 +3,17 @@ import json
 
 def save_json_string_into_file(json_string: str, file_path: str):
     # Open a file in write mode
-    with open(file_path, "w", encoding='utf8') as f:
+    with open(file_path, 'w', encoding='utf8') as file:
         # Write the JSON string to the file
-        f.write(json_string)
+        file.write(json_string)
 
 
 def read_file_as_string(file_path: str):
-    content: str = ''
 
     # Open the file in read mode
-    with open(file_path, "r", encoding='utf8') as f:
+    with open(file_path, 'r', encoding='utf8') as file:
         # Read the file as a string
-        content = f.read()
+        content = file.read()
 
     return content
 
