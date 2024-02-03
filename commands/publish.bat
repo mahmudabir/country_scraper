@@ -1,1 +1,1 @@
-pyinstaller -wF ../main.py
+pyinstaller -wF main.py
