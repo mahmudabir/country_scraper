@@ -1,6 +1,7 @@
-from helpers import country_scraper, json_helper, common_helper
+from helpers import common_helper, country_scraper, json_helper
+from helpers.csv_helper import list_to_csv_file
 
-file_path: str = 'countries.json'
+file_path: str = "countries.json"
 
 
 def main():
@@ -12,12 +13,14 @@ def main():
     country_list = []
     country_list = country_scraper.generate_data_from_json_file(file_path)
 
+    list_to_csv_file(country_list, "country_list.csv")
+
 
 if __name__ == "__main__":
     main()
 
     try:
-        print('\nPress any key to continue...')
+        print("\nPress any key to continue...")
         common_helper.wait_for_key()
     except Exception as ex:
         pass
